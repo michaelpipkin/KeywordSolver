@@ -152,7 +152,7 @@
 			FindWordsButton.Name = "FindWordsButton";
 			FindWordsButton.Size = new Size(75, 23);
 			FindWordsButton.TabIndex = 12;
-			FindWordsButton.Text = "Find Words";
+			FindWordsButton.Text = "Find Word";
 			FindWordsButton.UseVisualStyleBackColor = true;
 			FindWordsButton.Click += FindWordsButton_ClickAsync;
 			// 
