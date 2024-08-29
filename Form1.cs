@@ -31,7 +31,6 @@ namespace KeywordSolverForms
 			FindWordsButton.Enabled = false;
 			ClearButton.Enabled = false;
 			StopButton.Enabled = true;
-			Answers.Text = string.Empty;
 			await TestLetters();
 			FindWordsButton.Enabled = true;
 			ClearButton.Enabled = true;
@@ -75,34 +74,34 @@ namespace KeywordSolverForms
 								foreach (var fifthletter in fifthLetters) {
 									foreach (var sixthletter in sixthLetters) {
 										if (_cancellationTokenSource.Token.IsCancellationRequested) {
-											Answers.Invoke(new Action(() => Answers.AppendText($"{Environment.NewLine}Search cancelled.")));
+											Answers.Invoke(new Action(() => Answers.Text += $"{Environment.NewLine}Search cancelled."));
 											return;
 										}
 										var possibleWord = $"{firstetter}{secondletter}{thirdletter}{fourthletter}{fifthletter}{sixthletter}";
 										try {
 											var isWord = http.GetAsync($"https://api.dictionaryapi.dev/api/v2/entries/en/{possibleWord.ToLower()}").Result;
-											if (Answers.Text.Length > 0) Answers.Invoke(new Action(() => Answers.AppendText(Environment.NewLine)));
 											switch (isWord.StatusCode) {
 												case OK: {
-														Answers.Invoke(new Action(() => Answers.AppendText($"*** {possibleWord} ***")));
+														Answers.Invoke(new Action(() => Answers.Text = $"*** {possibleWord} ***"));
 														return;
 													}
 												case NotFound: {
-														Answers.Invoke(new Action(() => Answers.AppendText(possibleWord)));
+														Answers.Invoke(new Action(() => Answers.Text = possibleWord));
 														break;
 													}
 												case TooManyRequests: {
-														Answers.Invoke(new Action(() => Answers.AppendText("Too Many Requests response. Please wait and try again later.")));
+														Answers.Invoke(new Action(() => Answers.Text = $"Could not try {possibleWord}.{Environment.NewLine}"));
+														Answers.Invoke(new Action(() => Answers.Text += "Too Many Requests response. Please wait and try again later."));
 														return;
 													}
 												default: {
-														Answers.Invoke(new Action(() => Answers.AppendText($"Error {isWord.StatusCode}:{isWord.ReasonPhrase}. Please try again.")));
+														Answers.Invoke(new Action(() => Answers.Text = $"Error {isWord.StatusCode}:{isWord.ReasonPhrase}. Please try again."));
 														return;
 													}
 											}
 										}
 										catch (Exception ex) {
-											Answers.Invoke(new Action(() => Answers.AppendText(ex.Message)));
+											Answers.Invoke(new Action(() => Answers.Text = ex.Message));
 											return;
 										}
 										Thread.Sleep(1000);
@@ -113,7 +112,7 @@ namespace KeywordSolverForms
 					}
 				}
 				http.Dispose();
-				Answers.Invoke(new Action(() => Answers.AppendText($"{Environment.NewLine}No valid words found.")));
+				Answers.Invoke(new Action(() => Answers.Text = $"{Environment.NewLine}No valid words found."));
 			});
 		}
 	}

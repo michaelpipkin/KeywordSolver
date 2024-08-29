@@ -40,8 +40,8 @@
 			label6 = new Label();
 			FindWordsButton = new Button();
 			ClearButton = new Button();
-			Answers = new TextBox();
 			StopButton = new Button();
+			Answers = new Label();
 			SuspendLayout();
 			// 
 			// label1
@@ -166,17 +166,6 @@
 			ClearButton.UseVisualStyleBackColor = true;
 			ClearButton.Click += ClearButton_Click;
 			// 
-			// Answers
-			// 
-			Answers.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-			Answers.Location = new Point(18, 127);
-			Answers.Multiline = true;
-			Answers.Name = "Answers";
-			Answers.ReadOnly = true;
-			Answers.ScrollBars = ScrollBars.Vertical;
-			Answers.Size = new Size(347, 222);
-			Answers.TabIndex = 15;
-			// 
 			// StopButton
 			// 
 			StopButton.Enabled = false;
@@ -188,14 +177,22 @@
 			StopButton.UseVisualStyleBackColor = true;
 			StopButton.Click += StopButton_Click;
 			// 
+			// Answers
+			// 
+			Answers.AutoSize = true;
+			Answers.Location = new Point(12, 134);
+			Answers.Name = "Answers";
+			Answers.Size = new Size(0, 15);
+			Answers.TabIndex = 17;
+			// 
 			// Form1
 			// 
 			AcceptButton = FindWordsButton;
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(384, 361);
-			Controls.Add(StopButton);
+			ClientSize = new Size(384, 195);
 			Controls.Add(Answers);
+			Controls.Add(StopButton);
 			Controls.Add(ClearButton);
 			Controls.Add(FindWordsButton);
 			Controls.Add(SixthLetter);
@@ -233,7 +230,7 @@
 		private Label label6;
 		private Button FindWordsButton;
 		private Button ClearButton;
-		private TextBox Answers;
 		private Button StopButton;
+		private Label Answers;
 	}
 }
