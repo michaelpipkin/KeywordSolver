@@ -13,7 +13,7 @@ namespace KeywordSolverForms
 
 		private void EnterLetters(object sender, EventArgs e) {
 			if (sender is TextBox textBox && textBox.Text.Length > 0) {
-				textBox.Text = string.Concat((textBox.Text).ToUpper().Replace(" ", "").Distinct().OrderBy(c => c));
+				textBox.Text = string.Concat(textBox.Text.ToUpper().Replace(" ", "").Distinct().OrderBy(c => c));
 			}
 		}
 
